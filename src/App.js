@@ -4,6 +4,9 @@ function App() {
 
 	let difficulty = 12;
 	let cardValues;
+	let turn;
+	let selectCard1 = null;
+	let selectCard2 = null;
 
 	function newGame() {
 		console.log("NewGame");
@@ -22,9 +25,7 @@ function App() {
 		for (let i = 0; i < difficulty; i++) {
 			let img = document.createElement("img");
 			img.value = cardValues[i];
-			img.onclick = function(){
-				select(this.value);
-			};
+			img.onclick = select;
 			img.src = "src/Cardback.png";
 			img.alt = "card";
 			img.className = "card";
@@ -33,13 +34,56 @@ function App() {
 			card.append(img);
 			rows[i % 3].appendChild(card);
 		};
+		turn = 0;
+		let turnDisplay = document.getElementById("Turn");
+		turnDisplay.innerHTML = "Turn " + turn;
+	}
+
+	function select() {
+		this.src = "src/Card" + this.value + ".png";
+		this.onclick = function () { };
+		if (selectCard1 == null) {
+			selectCard1 = this;
+		}
+		else {
+			selectCard2 = this;
+			let blocker = document.getElementById("blocker");
+			blocker.className = "blocker";
+			setTimeout(turnUpdate, 1.0 * 1000);
+		};
+		console.log("Card value is " + this.value);
+	}
+
+	function turnUpdate() {
+		turn++;
+		let turnDisplay = document.getElementById("Turn");
+		turnDisplay.innerHTML = "Turn " + turn;
+		if (selectCard1.value === selectCard2.value) {
+			selectCard1 = null;
+			selectCard2 = null;
+		}
+		else {
+			selectCard1.onclick = select;
+			selectCard2.onclick = select;
+			selectCard1.src = "src/Cardback.png";
+			selectCard2.src = "src/Cardback.png";
+			selectCard1 = null;
+			selectCard2 = null;
+
+		};
+		setTimeout(removeBlocker, 0.5 * 1000);
+	}
+
+	function removeBlocker() {
+		let blocker = document.getElementById("blocker");
+		blocker.className = "blockernull";
 	}
 
 	function resetCardValue() {
 		cardValues = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,];
 		for (let i = 0; i < difficulty; i++) {
 			let r = Math.floor(Math.random() * difficulty);
-			while (cardValues[r] != 0) {
+			while (cardValues[r] !== 0) {
 				r = Math.floor(Math.random() * difficulty);
 			}
 			cardValues[r] = (i % (difficulty / 2)) + 1;
@@ -50,10 +94,6 @@ function App() {
 	function selectDiffculty() {
 		difficulty = document.getElementById("difficulty").value;
 		console.log("Changed difficulty to " + difficulty);
-	}
-
-	function select(value) {
-		console.log("Card value is " + value);
 	}
 
 	return (
@@ -78,9 +118,9 @@ function App() {
 						<option value="30">30</option>
 					</select>
 				</div>
-				<h3>
+				<p id="Turn" className="Turn">
 					Turn 0
-				</h3>
+				</p>
 			</div>
 			<table className="gamebox">
 				<tbody>
@@ -92,6 +132,8 @@ function App() {
 					</tr>
 				</tbody>
 			</table>
+			<div id="blocker">
+			</div>
 		</div>
 	);
 }
