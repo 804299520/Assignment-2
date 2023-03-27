@@ -100,3 +100,22 @@
   height: 0;
   width: 0;
 }
+
+.youWin{
+  position: absolute;
+  top: 50%;
+  right: 50%;
+  height: 140px;
+  width: 400px;
+  transform: translate(50%,-50%);
+  font-size: 100px;
+  background-color: white;
+}
+
+.youWinnull{
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 0;
+  width: 0;
+}

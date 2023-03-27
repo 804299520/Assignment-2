@@ -1,12 +1,15 @@
 import './App.css';
+import React, { useState } from 'react';
 
 function App() {
 
 	let difficulty = 12;
 	let cardValues;
 	let turn;
+	let completed;
 	let selectCard1 = null;
 	let selectCard2 = null;
+	const [count,setCount] = useState(0);
 
 	function newGame() {
 		console.log("NewGame");
@@ -35,8 +38,9 @@ function App() {
 			rows[i % 3].appendChild(card);
 		};
 		turn = 0;
-		let turnDisplay = document.getElementById("Turn");
-		turnDisplay.innerHTML = "Turn " + turn;
+		setCount(turn);
+		completed = 0;
+		resetWin();
 	}
 
 	function select() {
@@ -56,11 +60,11 @@ function App() {
 
 	function turnUpdate() {
 		turn++;
-		let turnDisplay = document.getElementById("Turn");
-		turnDisplay.innerHTML = "Turn " + turn;
+		setCount(turn);
 		if (selectCard1.value === selectCard2.value) {
 			selectCard1 = null;
 			selectCard2 = null;
+			completed++;
 		}
 		else {
 			selectCard1.onclick = select;
@@ -72,11 +76,27 @@ function App() {
 
 		};
 		setTimeout(removeBlocker, 0.5 * 1000);
+		if (completed * 2 == difficulty) {
+			youWin();
+			console.log("You win");
+		};
 	}
 
 	function removeBlocker() {
 		let blocker = document.getElementById("blocker");
 		blocker.className = "blockernull";
+	}
+
+	function youWin() {
+		let youWin = document.getElementById("YouWin");
+		youWin.className = "youWin";
+		youWin.innerHTML = "You Win!";
+	}
+
+	function resetWin() {
+		let youWin = document.getElementById("YouWin");
+		youWin.className = "youWinnull";
+		youWin.innerHTML = null;
 	}
 
 	function resetCardValue() {
@@ -119,7 +139,7 @@ function App() {
 					</select>
 				</div>
 				<p id="Turn" className="Turn">
-					Turn 0
+					Turn {count}
 				</p>
 			</div>
 			<table className="gamebox">
@@ -133,6 +153,8 @@ function App() {
 				</tbody>
 			</table>
 			<div id="blocker">
+			</div>
+			<div id="YouWin">
 			</div>
 		</div>
 	);
