@@ -79,7 +79,7 @@ function App() {
 		};
 		setTimeout(removeBlocker, 0.5 * 1000);
 		difficulty = document.getElementById("difficulty").value;
-		if (completed * 2 === difficulty) {
+		if (completed * 2 == difficulty) {
 			youWin();
 			console.log("You win");
 		};
