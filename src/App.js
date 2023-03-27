@@ -24,6 +24,7 @@ function App() {
 			};
 		};
 		resetCardValue();
+		difficulty = document.getElementById("difficulty").value;
 		for (let i = 0; i < difficulty; i++) {
 			let img = document.createElement("img");
 			img.value = cardValues[i];
@@ -39,6 +40,8 @@ function App() {
 		turn = 0;
 		setCount(turn);
 		completed = 0;
+		selectCard1 = null;
+		selectCard2 = null;
 		resetWin();
 	}
 
@@ -75,6 +78,7 @@ function App() {
 
 		};
 		setTimeout(removeBlocker, 0.5 * 1000);
+		difficulty = document.getElementById("difficulty").value;
 		if (completed * 2 === difficulty) {
 			youWin();
 			console.log("You win");
