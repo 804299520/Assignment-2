@@ -3,6 +3,7 @@ import './App.css';
 function App() {
 
 	let difficulty = 12;
+	let cardValues;
 
 	function newGame() {
 		console.log("NewGame");
@@ -10,14 +11,20 @@ function App() {
 	}
 
 	function resetGameBox() {
-		let rows = [document.getElementById("row1"), document.getElementById("row2"), document.getElementById("row3")];
+		console.log("Resetting GameBox...");
+		let rows = document.getElementsByTagName("tr");
 		for (let i = 0; i < rows.length; i++) {
 			while (rows[i].firstChild) {
 				rows[i].removeChild(rows[i].firstChild);
 			};
 		};
+		resetCardValue();
 		for (let i = 0; i < difficulty; i++) {
 			let img = document.createElement("img");
+			img.value = cardValues[i];
+			img.onclick = function(){
+				select(this.value);
+			};
 			img.src = "src/Cardback.png";
 			img.alt = "card";
 			img.className = "card";
@@ -28,9 +35,25 @@ function App() {
 		};
 	}
 
-	function selectdiffculty() {
+	function resetCardValue() {
+		cardValues = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,];
+		for (let i = 0; i < difficulty; i++) {
+			let r = Math.floor(Math.random() * difficulty);
+			while (cardValues[r] != 0) {
+				r = Math.floor(Math.random() * difficulty);
+			}
+			cardValues[r] = (i % (difficulty / 2)) + 1;
+			console.log("Card Value is now " + cardValues[r]);
+		};
+	}
+
+	function selectDiffculty() {
 		difficulty = document.getElementById("difficulty").value;
-		console.log("Change difficulty to " + difficulty);
+		console.log("Changed difficulty to " + difficulty);
+	}
+
+	function select(value) {
+		console.log("Card value is " + value);
 	}
 
 	return (
@@ -42,7 +65,7 @@ function App() {
 				<br />
 				<div className="difficulty">
 					<label>Difficulty: </label>
-					<select onChange={selectdiffculty} id="difficulty">
+					<select onChange={selectDiffculty} id="difficulty">
 						<option value="12">12</option>
 						<option value="14">14</option>
 						<option value="16">16</option>
@@ -61,11 +84,11 @@ function App() {
 			</div>
 			<table className="gamebox">
 				<tbody>
-					<tr id="row1">
+					<tr>
 					</tr>
-					<tr id="row2">
+					<tr>
 					</tr>
-					<tr id="row3">
+					<tr>
 					</tr>
 				</tbody>
 			</table>
