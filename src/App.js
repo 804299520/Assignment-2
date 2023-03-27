@@ -2,7 +2,6 @@ import './App.css';
 import React, { useState } from 'react';
 
 function App() {
-
 	let difficulty = 12;
 	let cardValues;
 	let turn;
@@ -29,7 +28,7 @@ function App() {
 			let img = document.createElement("img");
 			img.value = cardValues[i];
 			img.onclick = select;
-			img.src = "src/Cardback.png";
+			img.src = "src/CardBack.png";
 			img.alt = "card";
 			img.className = "card";
 			let card = document.createElement("td");
@@ -69,14 +68,14 @@ function App() {
 		else {
 			selectCard1.onclick = select;
 			selectCard2.onclick = select;
-			selectCard1.src = "src/Cardback.png";
-			selectCard2.src = "src/Cardback.png";
+			selectCard1.src = "src/CardBack.png";
+			selectCard2.src = "src/CardBack.png";
 			selectCard1 = null;
 			selectCard2 = null;
 
 		};
 		setTimeout(removeBlocker, 0.5 * 1000);
-		if (completed * 2 == difficulty) {
+		if (completed * 2 === difficulty) {
 			youWin();
 			console.log("You win");
 		};
