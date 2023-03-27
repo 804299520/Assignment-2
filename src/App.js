@@ -1,23 +1,63 @@
-import logo from './logo.svg';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>
+        New Game
+      </h1>
+      <h3>
+        Difficulty
+      </h3>
+      <h3>
+        Turn 0
+      </h3>
+      <table className="gamebox">
+        <tbody>
+          <tr>
+            <td className="cardbox">
+              <img src="src/Cardback.png" alt="card" className="card" />
+            </td>
+            <td className="cardbox">
+              <img src="src/Cardback.png" alt="card" className="card" />
+            </td>
+            <td className="cardbox">
+              <img src="src/Cardback.png" alt="card" className="card" />
+            </td>
+            <td className="cardbox">
+              <img src="src/Cardback.png" alt="card" className="card" />
+            </td>
+          </tr>
+          <tr>
+            <td className="cardbox">
+              <img src="src/Cardback.png" alt="card" className="card" />
+            </td>
+            <td className="cardbox">
+              <img src="src/Cardback.png" alt="card" className="card" />
+            </td>
+            <td className="cardbox">
+              <img src="src/Cardback.png" alt="card" className="card" />
+            </td>
+            <td className="cardbox">
+              <img src="src/Cardback.png" alt="card" className="card" />
+            </td>
+          </tr>
+          <tr>
+            <td className="cardbox">
+              <img src="src/Cardback.png" alt="card" className="card" />
+            </td>
+            <td className="cardbox">
+              <img src="src/Cardback.png" alt="card" className="card" />
+            </td>
+            <td className="cardbox">
+              <img src="src/Cardback.png" alt="card" className="card" />
+            </td>
+            <td className="cardbox">
+              <img src="src/Cardback.png" alt="card" className="card" />
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   );
 }
