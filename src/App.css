@@ -37,6 +37,33 @@
   }
 }
 
+.board
+{
+  position: absolute;
+  top: 20px;
+  right: 50%;
+  transform: translate(50%,0);
+}
+
+.newGame {
+  padding: 0px;
+  border: 5px solid black;
+  background-color: rgb(200,200,200);
+  color: black;
+  font-size: 20px;
+  height: 80px;
+  width: 200px;
+}
+
+.difficulty {
+  padding: 0px;
+  margin: 20px;
+  height: 40px;
+  width: 200px;
+  font-size: 20px;
+  align-content: center;
+}
+
 .gamebox {
   position: absolute;
   top: 50%;
