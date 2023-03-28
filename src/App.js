@@ -29,7 +29,7 @@ function App() {
 			let img = document.createElement("img");
 			img.value = cardValues[i];
 			img.onclick = select;
-			img.src = "src/CardBack.png";
+			img.src = process.env.PUBLIC_URL + "/src/CardBack.png";
 			img.alt = "card";
 			img.className = "card";
 			let card = document.createElement("td");
@@ -46,7 +46,7 @@ function App() {
 	}
 
 	function select() {
-		this.src = "src/Card" + this.value + ".png";
+		this.src = process.env.PUBLIC_URL + "/src/Card" + this.value + ".png";
 		this.onclick = function () { };
 		if (selectCard1 == null) {
 			selectCard1 = this;
@@ -71,14 +71,16 @@ function App() {
 		else {
 			selectCard1.onclick = select;
 			selectCard2.onclick = select;
-			selectCard1.src = "src/CardBack.png";
-			selectCard2.src = "src/CardBack.png";
+			selectCard1.src = process.env.PUBLIC_URL + "/src/CardBack.png";
+			selectCard2.src = process.env.PUBLIC_URL + "/src/CardBack.png";
 			selectCard1 = null;
 			selectCard2 = null;
 
 		};
+		console.log(completed);
+		console.log(completed * 2);
+		console.log(difficulty);
 		setTimeout(removeBlocker, 0.5 * 1000);
-		difficulty = document.getElementById("difficulty").value;
 		if (completed * 2 == difficulty) {
 			youWin();
 			console.log("You win");
@@ -157,7 +159,8 @@ function App() {
 			</table>
 			<div id="blocker">
 			</div>
-			<div id="YouWin">
+			<div id="YouWin" className="youWin">
+				Game of Memory
 			</div>
 		</div>
 	);
